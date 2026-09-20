@@ -21,10 +21,10 @@ export class AvailablePlacesComponent implements OnInit {
 
   ngOnInit(): void {
     this.isFetching.set(true);
-    const placesServeSubscription = this.placeService.loadAvailablePlaces()
+    const placesServeSubscription = this.placeService
+      .loadAvailablePlaces()
       .subscribe({
         next: (response) => {
-          console.log(response);
           this.places.set(response);
         },
         error: (error) => {
@@ -36,10 +36,9 @@ export class AvailablePlacesComponent implements OnInit {
   }
 
   onSelectPlace(selectedPlace: Place) {
-    const placesServeSubscription =    this.placeService.addPlaceToUserPlaces(selectedPlace)
-      .subscribe({
-        next: (response) => console.log(response),        
-      });
-      this.destroyRef.onDestroy(() => placesServeSubscription.unsubscribe())
+    const placesServeSubscription = this.placeService
+      .addPlaceToUserPlaces(selectedPlace)
+      .subscribe({});
+    this.destroyRef.onDestroy(() => placesServeSubscription.unsubscribe());
   }
 }
